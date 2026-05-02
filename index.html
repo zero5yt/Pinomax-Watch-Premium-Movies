@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinomax - Watch Free</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#000;
+  color:#fff;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+/* background */
+.bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at top,#1a1a1a,#000);
+  z-index:-2;
+}
+
+/* snow */
+.snowflake{
+  position:fixed;
+  top:-10px;
+  color:#fff;
+  opacity:0.7;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(100vh);}
+}
+
+/* container */
+.container{
+  padding:15px;
+}
+
+/* logo */
+.logo img{
+  width:140px;
+  margin-top:10px;
+}
+
+/* slider */
+.slider{
+  max-width:420px;
+  margin:10px auto;
+}
+.slider img{
+  width:100%;
+  border-radius:12px;
+  transition:0.5s;
+}
+
+/* TEXT */
+.title{
+  font-size:20px;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.sub{
+  color:#aaa;
+  font-size:13px;
+}
+
+.warning{
+  color:#ff4d4d;
+  font-size:13px;
+  margin-top:8px;
+}
+
+/* buttons */
+.btn{
+  background:#FFD700;
+  color:#000;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  width:85%;
+  max-width:320px;
+  font-size:15px;
+  font-weight:bold;
+  margin:8px auto;
+  cursor:pointer;
+}
+
+/* features */
+.features{
+  text-align:left;
+  max-width:320px;
+  margin:15px auto;
+}
+.features p{
+  margin:6px 0;
+}
+
+/* loader */
+#loader{
+  display:none;
+  margin-top:10px;
+}
+.bar{
+  width:80%;
+  height:8px;
+  background:#333;
+  margin:auto;
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress{
+  width:0%;
+  height:100%;
+  background:#FFD700;
+  animation:load 3s linear forwards;
+}
+@keyframes load{
+  to{width:100%;}
+}
+
+/* modal */
+.modal{
+  display:none;
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.9);
+  z-index:10;
+}
+.modal-content{
+  margin-top:20%;
+}
+.close{
+  font-size:30px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="container">
+
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="https://i.ibb.co/zHFKDqzd/pinomax.png">
+  </div>
+
+  <!-- SLIDER -->
+  <div class="slider">
+    <img id="slide" src="https://i.ibb.co/zHFKDqzd/pinomax.png">
+  </div>
+
+  <!-- TEXT -->
+  <div class="title">
+    Watch Tagalog Dubbed Movies & Series for FREE 🎬
+  </div>
+
+  <div class="sub">
+    No signup • No subscription • Unlimited access
+  </div>
+
+  <div class="warning">
+    ⚠️ Limited access only – download now!
+  </div>
+
+  <!-- BUTTONS -->
+  <button class="btn" onclick="openTrailer()">🎬 Watch Trailer</button>
+  <button class="btn" onclick="startDownload()">📥 Download APK</button>
+  <button class="btn" onclick="followPage()">📲 Follow Page</button>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <p>Preparing secure download...</p>
+    <div class="bar"><div class="progress"></div></div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <p>✅ Tagalog Dubbed Content</p>
+    <p>✅ Fast Streaming</p>
+    <p>✅ Daily Updated Movies</p>
+    <p>✅ No Subscription</p>
+  </div>
+
+  <div style="margin-top:10px;color:#0f0;font-size:13px;">
+    🔥 25,000+ users already watching!
+  </div>
+
+  <div style="font-size:12px;color:#aaa;margin-top:10px;">
+    Enable "Install Unknown Apps" to install APK
+  </div>
+
+</div>
+
+<!-- 🎬 TRAILER MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+
+    <span class="close" onclick="closeTrailer()">✖</span>
+
+    <div id="playerBox" style="max-width:90%;margin:auto;"></div>
+
+    <div style="margin-top:10px;">
+      <button class="btn" style="width:140px;" onclick="playYT()">YouTube</button>
+      <button class="btn" style="width:140px;" onclick="playFB()">Facebook</button>
+      <button class="btn" style="width:140px;" onclick="openShort()">Backup</button>
+    </div>
+
+    <p style="margin-top:10px;color:#aaa;font-size:13px;">
+      🎬 Trailer Preview
+    </p>
+
+  </div>
+</div>
+
+<script>
+
+/* snow */
+for(let i=0;i<40;i++){
+  let s=document.createElement("div");
+  s.className="snowflake";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(2+Math.random()*5)+"s";
+  document.body.appendChild(s);
+}
+
+/* slider */
+const slides=[
+  "https://i.ibb.co/zHFKDqzd/pinomax.png",
+  "https://i.ibb.co/7Q9kZ3m/drama2.jpg",
+  "https://i.ibb.co/5GmYtJk/horror3.jpg"
+];
+
+let i=0;
+setInterval(()=>{
+  let img=document.getElementById("slide");
+  img.style.opacity=0;
+  setTimeout(()=>{
+    i=(i+1)%slides.length;
+    img.src=slides[i];
+    img.style.opacity=1;
+  },400);
+},3000);
+
+/* download */
+function startDownload(){
+  document.getElementById("loader").style.display="block";
+  setTimeout(()=>{
+    window.location.href="https://www.mediafire.com/file/yemg408et3bj8dy/Pinomaxph_Free_21.apk/file";
+  },3000);
+}
+
+/* trailer */
+function openTrailer(){
+  document.getElementById("modal").style.display="block";
+  playYT();
+}
+
+function closeTrailer(){
+  document.getElementById("modal").style.display="none";
+  document.getElementById("playerBox").innerHTML="";
+}
+
+/* YouTube */
+function playYT(){
+  document.getElementById("playerBox").innerHTML = `
+    <iframe width="100%" height="220"
+    src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+    style="border-radius:12px;"></iframe>
+  `;
+}
+
+/* Facebook */
+function playFB(){
+  document.getElementById("playerBox").innerHTML = `
+    <iframe
+    src="https://www.facebook.com/plugins/video.php?href=FACEBOOK_VIDEO_LINK&show_text=0&autoplay=1"
+    width="100%" height="220"
+    style="border-radius:12px;border:none;overflow:hidden"
+    scrolling="no"
+    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+    allowfullscreen>
+    </iframe>
+  `;
+}
+
+/* backup link */
+function openShort(){
+  window.open("https://short.icu/YOUR_LINK","_blank");
+}
+
+/* follow */
+function followPage(){
+  window.open("https://facebook.com","_blank");
+}
+
+</script>
+
+</body>
+</html>
