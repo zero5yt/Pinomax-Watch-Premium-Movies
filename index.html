@@ -40,12 +40,6 @@ body{
   padding:15px;
 }
 
-/* logo */
-.logo img{
-  width:140px;
-  margin-top:10px;
-}
-
 /* slider */
 .slider{
   max-width:420px;
@@ -63,12 +57,10 @@ body{
   margin-top:10px;
   font-weight:bold;
 }
-
 .sub{
   color:#aaa;
   font-size:13px;
 }
-
 .warning{
   color:#ff4d4d;
   font-size:13px;
@@ -113,16 +105,6 @@ body{
   to{width:100%;}
 }
 
-/* features */
-.features{
-  text-align:left;
-  max-width:320px;
-  margin:15px auto;
-}
-.features p{
-  margin:6px 0;
-}
-
 /* modal */
 .modal{
   display:none;
@@ -147,11 +129,6 @@ body{
 <div class="bg"></div>
 
 <div class="container">
-
-  <!-- LOGO -->
-  <div class="logo">
-    <img src="https://i.ibb.co/zHFKDqzd/pinomax.png">
-  </div>
 
   <!-- SLIDER -->
   <div class="slider">
@@ -183,7 +160,7 @@ body{
   </div>
 
   <!-- FEATURES -->
-  <div class="features">
+  <div style="text-align:left;max-width:320px;margin:15px auto;">
     <p>✅ Tagalog Dubbed Content</p>
     <p>✅ Fast Streaming</p>
     <p>✅ Daily Updated Movies</p>
@@ -211,7 +188,6 @@ body{
     <div style="margin-top:10px;">
       <button class="btn" style="width:140px;" onclick="playYT()">YouTube</button>
       <button class="btn" style="width:140px;" onclick="playFB()">Facebook</button>
-      <button class="btn" style="width:140px;" onclick="openShort()">Backup</button>
     </div>
 
   </div>
@@ -255,23 +231,22 @@ function startDownload(){
   },3000);
 }
 
-/* trailer open */
+/* trailer */
 function openTrailer(){
   document.getElementById("modal").style.display="block";
   playYT();
 }
 
-/* close */
 function closeTrailer(){
   document.getElementById("modal").style.display="none";
   document.getElementById("playerBox").innerHTML="";
 }
 
-/* YouTube */
+/* 🎬 YOUTUBE (FIXED NA) */
 function playYT(){
   document.getElementById("playerBox").innerHTML = `
     <iframe width="100%" height="230"
-    src="https://www.youtube.com/embed/KZhnAvDyr44?si=673zIFjwWBN1BjBn?autoplay=1"
+    src="https://www.youtube.com/embed/KZhnAvDyr44?autoplay=1"
     frameborder="0"
     allow="autoplay; encrypted-media"
     allowfullscreen
@@ -279,14 +254,9 @@ function playYT(){
   `;
 }
 
-/* Facebook reel */
+/* FB REEL */
 function playFB(){
   window.open("https://www.facebook.com/reel/1504570967984015","_blank");
-}
-
-/* backup */
-function openShort(){
-  window.open("https://short.icu/YOUR_LINK","_blank");
 }
 
 /* follow */
