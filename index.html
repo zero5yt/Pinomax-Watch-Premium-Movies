@@ -15,7 +15,6 @@ body{
   overflow-x:hidden;
 }
 
-/* background */
 .bg{
   position:fixed;
   width:100%;
@@ -58,7 +57,7 @@ body{
   transition:0.5s;
 }
 
-/* TEXT */
+/* text */
 .title{
   font-size:20px;
   margin-top:10px;
@@ -91,16 +90,6 @@ body{
   cursor:pointer;
 }
 
-/* features */
-.features{
-  text-align:left;
-  max-width:320px;
-  margin:15px auto;
-}
-.features p{
-  margin:6px 0;
-}
-
 /* loader */
 #loader{
   display:none;
@@ -124,13 +113,23 @@ body{
   to{width:100%;}
 }
 
+/* features */
+.features{
+  text-align:left;
+  max-width:320px;
+  margin:15px auto;
+}
+.features p{
+  margin:6px 0;
+}
+
 /* modal */
 .modal{
   display:none;
   position:fixed;
   top:0;left:0;
   width:100%;height:100%;
-  background:rgba(0,0,0,0.9);
+  background:rgba(0,0,0,0.95);
   z-index:10;
 }
 .modal-content{
@@ -201,7 +200,7 @@ body{
 
 </div>
 
-<!-- 🎬 TRAILER MODAL -->
+<!-- TRAILER MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
 
@@ -214,10 +213,6 @@ body{
       <button class="btn" style="width:140px;" onclick="playFB()">Facebook</button>
       <button class="btn" style="width:140px;" onclick="openShort()">Backup</button>
     </div>
-
-    <p style="margin-top:10px;color:#aaa;font-size:13px;">
-      🎬 Trailer Preview
-    </p>
 
   </div>
 </div>
@@ -260,12 +255,13 @@ function startDownload(){
   },3000);
 }
 
-/* trailer */
+/* trailer open */
 function openTrailer(){
   document.getElementById("modal").style.display="block";
   playYT();
 }
 
+/* close */
 function closeTrailer(){
   document.getElementById("modal").style.display="none";
   document.getElementById("playerBox").innerHTML="";
@@ -274,7 +270,7 @@ function closeTrailer(){
 /* YouTube */
 function playYT(){
   document.getElementById("playerBox").innerHTML = `
-    <iframe width="100%" height="220"
+    <iframe width="100%" height="230"
     src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1"
     frameborder="0"
     allow="autoplay; encrypted-media"
@@ -283,21 +279,12 @@ function playYT(){
   `;
 }
 
-/* Facebook */
+/* Facebook reel */
 function playFB(){
-  document.getElementById("playerBox").innerHTML = `
-    <iframe
-    src="https://www.facebook.com/plugins/video.php?href=FACEBOOK_VIDEO_LINK&show_text=0&autoplay=1"
-    width="100%" height="220"
-    style="border-radius:12px;border:none;overflow:hidden"
-    scrolling="no"
-    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-    allowfullscreen>
-    </iframe>
-  `;
+  window.open("https://www.facebook.com/reel/1504570967984015","_blank");
 }
 
-/* backup link */
+/* backup */
 function openShort(){
   window.open("https://short.icu/YOUR_LINK","_blank");
 }
