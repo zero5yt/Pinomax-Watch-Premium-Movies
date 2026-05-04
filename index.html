@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#000;
   color:#fff;
   text-align:center;
@@ -30,6 +30,7 @@ body{
   color:#fff;
   opacity:0.7;
   animation:fall linear infinite;
+  pointer-events: none;
 }
 @keyframes fall{
   to{transform:translateY(100vh);}
@@ -40,15 +41,24 @@ body{
   padding:15px;
 }
 
-/* slider */
-.slider{
-  max-width:420px;
-  margin:10px auto;
+/* --- FIXED SLIDER SIZE (1280x720 Ratio) --- */
+.slider {
+  max-width: 480px; /* Width sa mobile, adjust mo kung gusto mo mas malapad */
+  aspect-ratio: 16 / 9; /* Ito ang magic line para maging 1280x720 ratio lagi */
+  margin: 15px auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #111; /* Color habang naglo-load ang image */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-.slider img{
-  width:100%;
-  border-radius:12px;
-  transition:0.5s;
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ito ang nagfi-fix para hindi banat ang image */
+  transition: opacity 0.8s ease-in-out; /* Mas smooth na transition */
+  display: block;
 }
 
 /* text */
@@ -56,6 +66,7 @@ body{
   font-size:20px;
   margin-top:10px;
   font-weight:bold;
+  padding: 0 10px;
 }
 .sub{
   color:#aaa;
@@ -80,6 +91,11 @@ body{
   font-weight:bold;
   margin:8px auto;
   cursor:pointer;
+  display: block;
+  transition: transform 0.2s;
+}
+.btn:active {
+  transform: scale(0.95);
 }
 
 /* loader */
@@ -130,7 +146,7 @@ body{
 
 <div class="container">
 
-  <!-- SLIDER -->
+  <!-- SLIDER (Naka-fix na ang size dito) -->
   <div class="slider">
     <img id="slide" src="https://i.ibb.co/zHFKDqzd/pinomax.png">
   </div>
@@ -180,28 +196,24 @@ body{
 <!-- TRAILER MODAL -->
 <div class="modal" id="modal">
   <div class="modal-content">
-
     <span class="close" onclick="closeTrailer()">✖</span>
-
     <div id="playerBox" style="max-width:90%;margin:auto;"></div>
-
     <div style="margin-top:10px;">
-      <button class="btn" style="width:140px;" onclick="playYT()">YouTube</button>
-      <button class="btn" style="width:140px;" onclick="playFB()">Facebook</button>
+      <button class="btn" style="width:140px; display:inline-block;" onclick="playYT()">YouTube</button>
+      <button class="btn" style="width:140px; display:inline-block;" onclick="playFB()">Facebook</button>
     </div>
-
   </div>
 </div>
 
 <script>
-
 /* snow */
-for(let i=0;i<40;i++){
+for(let i=0;i<30;i++){
   let s=document.createElement("div");
   s.className="snowflake";
   s.innerHTML="❄";
   s.style.left=Math.random()*100+"vw";
   s.style.animationDuration=(2+Math.random()*5)+"s";
+  s.style.fontSize=(Math.random()*15+10)+"px";
   document.body.appendChild(s);
 }
 
@@ -215,15 +227,22 @@ const slides=[
 ];
 
 let i=0;
+// Preload images para hindi nagka-flicker
+slides.forEach(src => {
+  const img = new Image();
+  img.src = src;
+});
+
 setInterval(()=>{
   let img=document.getElementById("slide");
-  img.style.opacity=0;
+  img.style.opacity=0.3; // Fade out effect
+  
   setTimeout(()=>{
     i=(i+1)%slides.length;
     img.src=slides[i];
-    img.style.opacity=1;
-  },400);
-},3000);
+    img.style.opacity=1; // Fade in effect
+  },400); // 400ms transition
+},4000); // Nag-adjust ako sa 4 seconds para mas readable ang poster
 
 /* download */
 function startDownload(){
@@ -244,11 +263,10 @@ function closeTrailer(){
   document.getElementById("playerBox").innerHTML="";
 }
 
-/* 🎬 YOUTUBE (FIXED NA) */
 function playYT(){
   document.getElementById("playerBox").innerHTML = `
     <iframe width="100%" height="230"
-    src="https://www.youtube.com/embed/KZhnAvDyr44?autoplay=1"
+    src="https://www.youtube.com/embed/SshZk9uOatA"
     frameborder="0"
     allow="autoplay; encrypted-media"
     allowfullscreen
@@ -256,16 +274,13 @@ function playYT(){
   `;
 }
 
-/* FB REEL */
 function playFB(){
   window.open("https://www.facebook.com/reel/1504570967984015","_blank");
 }
 
-/* follow */
 function followPage(){
   window.open("https://facebook.com","_blank");
 }
-
 </script>
 
 </body>
