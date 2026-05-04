@@ -79,23 +79,63 @@ body{
 }
 
 /* buttons */
-.btn{
-  background:#FFD700;
-  color:#000;
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  width:85%;
-  max-width:320px;
-  font-size:15px;
-  font-weight:bold;
-  margin:8px auto;
-  cursor:pointer;
+/* --- UPDATED BUTTONS (Maliit & Makulay) --- */
+.btn {
+  /* Kulay: Gradient para maganda tignan */
+  background: linear-gradient(45deg, #FFD700, #FFA500); 
+  color: #000;
+  
+  /* Size: Ginawang 12px padding at mas maliit na font */
+  padding: 12px;
+  font-size: 14px;
+  width: 80%; /* Binawasan mula 85% */
+  max-width: 260px; /* Binawasan mula 320px */
+  
+  border: none;
+  border-radius: 50px; /* Rounded corners para modern */
+  font-weight: bold;
+  margin: 6px auto;
+  cursor: pointer;
   display: block;
-  transition: transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+  /* Transition para smooth yung kulay */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
+
+/* PAG NAKA-HOVER (Tinapat ang mouse o daliri) */
+.btn:hover {
+  transform: translateY(-2px); /* Tatalon nang konti pataas */
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+  filter: brightness(1.1); /* Sisigla ang kulay */
+}
+
+/* PAG PININDOT (Click Effect) */
 .btn:active {
-  transform: scale(0.95);
+  transform: scale(0.95); /* Liliit nang konti para parang totoong pindutan */
+}
+
+/* Iba-ibang kulay para sa bawat button (Optional pero mas maganda) */
+
+/* Watch Trailer - Kulay Red/Orange */
+.btn-trailer {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+}
+
+/* Download - Kulay Green/Gold */
+.btn-download {
+  background: linear-gradient(45deg, #FFD700, #ffb300);
+}
+
+/* Follow - Kulay Blue (Facebook vibe) */
+.btn-follow {
+  background: linear-gradient(45deg, #0084ff, #00c6ff);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 132, 255, 0.3);
 }
 
 /* loader */
@@ -165,9 +205,9 @@ body{
   </div>
 
   <!-- BUTTONS -->
-  <button class="btn" onclick="startDownload()">📥 Download APK</button>
-  <button class="btn" onclick="openTrailer()">🎬 Watch My Gaming</button>
-  <button class="btn" onclick="followPage()">📲 Follow Page</button>
+ <button class="btn btn-download" onclick="startDownload()">📥 Download Now</button>
+ <button class="btn btn-trailer" onclick="openTrailer()">🎬 Watch My Gaming</button>
+ <button class="btn btn-follow" onclick="followPage()">📲 Follow Page</button>
 
   <!-- LOADER -->
   <div id="loader">
